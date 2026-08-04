@@ -1,0 +1,22 @@
+"# DERIVED from fig2e.csv, which carries the two columns unlabelled by degree."
+# The first bin is degree 2 because a muscle spans at least an origin and an
+"# insertion, the counts sum to exactly 270 which is the published number of"
+"# muscles, and Murphy et al. state that most muscles link two bones."
+bones_linked,muscles_measured,muscles_random_null
+2,148,48
+3,47,81
+4,24,76
+5,10,35
+6,7,19
+7,9,8
+8,3,3
+9,3,0
+10,5,0
+11,3,0
+12,4,0
+13,1,0
+14,2,0
+15,1,0
+16,1,0
+17,1,0
+18,1,0

@@ -1,0 +1,10 @@
+# DERIVED from cov_MOTOR. How the reading moves if a threshold is imposed
+"# on the correlation matrix. The figure reports the last row, every pair"
+"# weighted and no threshold, because a threshold is a free parameter. This"
+# sweep is what makes that choice visible.
+links_kept,mean_degree,regions_connected,H_bits,J,compression_1_minus_J,effective_count_2H
+300,6.0,84,5.473236,0.856221,0.143779,44.4230
+600,12.0,97,5.815405,0.881134,0.118866,56.3133
+1200,24.0,100,6.154662,0.926369,0.073631,71.2423
+2475,49.5,100,6.438318,0.969063,0.030937,86.7215
+4950,99.0,100,6.546752,0.985384,0.014616,93.4908

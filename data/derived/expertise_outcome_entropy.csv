@@ -1,0 +1,26 @@
+"# DERIVED. Per-participant outcome dispersions transcribed as published, and"
+# the Gaussian differential entropy h = 0.5 log2(2 pi e sigma^2) computed
+"# from each. Only differences in h are interpreted, because the additive"
+# constant and the unit cancel. The source publication is still to be
+# supplied by the author; see the open item in the project note.
+group,participant,outcome_sd_cm,outcome_entropy_h_bits
+Expert,1,0.93,1.942398
+Expert,2,0.83,1.778279
+Expert,3,1.05,2.117485
+Expert,4,1.07,2.144706
+Expert,5,0.92,1.926801
+Expert,6,1.02,2.075665
+Expert,7,0.89,1.878973
+Expert,8,1.16,2.261220
+Expert,9,1.09,2.171424
+Expert,10,0.91,1.911034
+Novice,1,2.22,3.197655
+Novice,2,2.66,3.458522
+Novice,3,2.51,3.374783
+Novice,4,2.07,3.096726
+Novice,5,2.31,3.254988
+Novice,6,2.27,3.229788
+Novice,7,2.76,3.511764
+Novice,8,2.49,3.363241
+Novice,9,2.53,3.386233
+Novice,10,2.36,3.285882

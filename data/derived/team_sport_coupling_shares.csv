@@ -1,0 +1,25 @@
+# DERIVED. Coupling shares by Eq 1 and the colour quantity log2(p_i N).
+# These are the bar heights and bar colours drawn in panel A.
+sport,rank,position,share_p_i,log2_p_i_N
+Football,1,DM,0.1580645161,0.798017
+Football,2,OM,0.1193548387,0.392761
+Football,3,LM,0.1032258065,0.183307
+Football,4,RM,0.1032258065,0.183307
+Football,5,RCD,0.0870967742,-0.061805
+Football,6,LCD,0.0838709677,-0.116253
+Football,7,LD,0.0838709677,-0.116253
+Football,8,RD,0.0838709677,-0.116253
+Football,9,LF,0.0677419355,-0.424375
+Football,10,RF,0.0677419355,-0.424375
+Football,11,GK,0.0419354839,-1.116253
+Handball,1,C,0.2878787879,0.788496
+Handball,2,RB,0.2606060606,0.644905
+Handball,3,LB,0.2575757576,0.628031
+Handball,4,P,0.0878787879,-0.923379
+Handball,5,RW,0.0606060606,-1.459432
+Handball,6,LW,0.0454545455,-1.874469
+Basketball (mean profile),1,PG,0.3155687145,0.657954
+Basketball (mean profile),2,SG,0.1934369603,-0.048137
+Basketball (mean profile),3,SF,0.1769059956,-0.177017
+Basketball (mean profile),4,PF,0.1734517641,-0.205465
+Basketball (mean profile),5,CN,0.1406365655,-0.508028
