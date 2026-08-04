@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+title: >-
+  Control entropy measures the compression a coordinative structure
+  achieves. Code and data.
+message: If you use this software or these data, please cite the paper.
+type: software
+authors:
+  - family-names: Park
+    given-names: Chulwook
+    orcid: https://orcid.org/0000-0001-8714-5760
+    affiliation: >-
+      Department of Physical Education, Seoul National University,
+      Seoul, Republic of Korea
+license: MIT
+version: 1.0.0
+# doi: 10.5281/zenodo.XXXXXXX   <- the concept DOI, once Zenodo mints it
+# date-released: YYYY-MM-DD
+keywords:
+  - coordinative structure
+  - degrees of freedom
+  - control entropy
+  - information theory
+  - motor learning
+references:
+  - type: data
+    title: >-
+      Structure, function, and control of the musculoskeletal network - Data
+    authors:
+      - family-names: Murphy
+        given-names: Andrew C.
+      - family-names: Muldoon
+        given-names: Sarah F.
+      - family-names: Baker
+        given-names: David
+      - family-names: Lastowka
+        given-names: Adam
+      - family-names: Bennett
+        given-names: Brittany
+      - family-names: Yang
+        given-names: Muzhi
+      - family-names: Bassett
+        given-names: Danielle S.
+    doi: 10.5281/zenodo.1069104
+    license: CC-BY-SA-4.0
