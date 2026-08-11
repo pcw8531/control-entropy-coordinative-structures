@@ -1,4 +1,4 @@
-# Control entropy measures the compression a coordinative structure achieves
+# Mean information in bits measures how far network topology compresses control in a coordinative structure
 
 Code and data for the paper. Everything printed in the manuscript, the SI
 Appendix and the figure captions is recomputed here from the released files.
