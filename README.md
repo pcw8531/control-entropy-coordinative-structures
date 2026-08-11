@@ -1,5 +1,7 @@
 # Mean information in bits measures how far network topology compresses control in a coordinative structure
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21789489.svg)](https://doi.org/10.5281/zenodo.21789489)
+
 Code and data for the paper. Everything printed in the manuscript, the SI
 Appendix and the figure captions is recomputed here from the released files.
 
