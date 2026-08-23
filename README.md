@@ -1,6 +1,6 @@
 # Average information across a network measures what a coordinative structure buys in motor control
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21789489.svg)](https://doi.org/10.5281/zenodo.21789489)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21789488.svg)](https://doi.org/10.5281/zenodo.21789488)
 
 Code and data for the paper. Everything printed in the manuscript, the SI
 Appendix and the figure captions is recomputed here from the released files.
