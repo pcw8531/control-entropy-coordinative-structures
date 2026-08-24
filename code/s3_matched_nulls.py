@@ -1,4 +1,4 @@
-"""s3. SI Table S8. Each measured structure against the four generated
+"""s3. Supplementary Table 6. Each measured structure against the four generated
 topologies run at its own size, sixty realisations per cell, compression 1 - J.
 
 Two columns of results are printed, and the difference between them is on the
@@ -9,7 +9,7 @@ record rather than buried.
     bare        the superseded scale-free form, grown from a bare seed at three
                 links per node at every size
 
-The values printed in the current SI Table S8 come from the bare form. The three
+The values printed in the current SUPPLEMENTARY TABLE 6 come from the bare form. The three
 non scale-free columns are the same either way, which is why only that one column
 moves. Where a Barabasi-Albert graph cannot reach the row's mean degree the link
 count actually used is printed, because at five, six and eleven elements no
