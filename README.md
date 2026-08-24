@@ -28,13 +28,10 @@ That script checks the size and hash of every released file, recomputes every va
 | Script | Produces |
 | --- | --- |
 | `code/s1_ensembles.py` | Table 1, Figure 3, Supplementary Tables 1 to 5 |
-| `code/s2_measured.py` | Supplementary Notes 4 and 5, Supplementary Tables 6 and 7 |
-| `code/s3_matched_nulls.py` | Supplementary Table 8 |
+| `code/s2_measured.py` | Supplementary Tables 7 and 8, Supplementary Notes 4 and 5 |
+| `code/s3_matched_nulls.py` | Supplementary Table 6 |
 | `code/s9_resampling.py` | Supplementary Table 9, and the lower row of Figure 4 |
-
-<!-- CHECK before publishing: the SI now numbers the matched-null table as Supplementary Table 6
-     (four topology columns, sixty realisations per cell), the measured-structure table as 7 and
-     the outcome-entropy table as 8. Run each script and confirm which table it writes. -->
+| `reproduce.py` | Runs the gate and then all four scripts in order. `--gate` runs the gate alone. |
 
 Every value the paper prints comes out of those scripts. Nothing has to be run in a particular order beyond the verification gate.
 
@@ -44,17 +41,17 @@ Every value the paper prints comes out of those scripts. Nothing has to be run i
 
 | Path | What it holds |
 | --- | --- |
-| `code/core.py` | The equation module, Eq 1 to 13 in the Methods numbering. Every number in the paper traces to one definition here. |
+| `code/core.py` | The equation module, Methods Eq 1 to 13. Every number in the paper traces to one definition here. Equations 14 to 19 are applied in the analysis scripts. |
 | `code/generators.py` | The four matched topology ensembles |
 | `code/loaders.py` | Readers and the provenance record |
 | `code/s*.py` | The analyses, named as the Supplementary Information names them |
 | `code/verify_published_values.py` | The gate. Hashes every input and recomputes every published value. |
 | `data/derived/` | Nine CSVs, each computed from a released file or transcribed from a published table. Each carries a comment header saying where it came from. |
 | `data/external/` | Files belonging to other groups. See below. |
+| `checksums.sha256` | sha256 of every tracked file in the deposit. Verify with `sha256sum -c checksums.sha256`. |
 | [`SOURCES.md`](SOURCES.md) | Full provenance for every input file |
 
-<!-- CHECK before publishing: the manuscript now labels equations 1 to 19, and cites Eq 14, 16, 18
-     and 19 by name. Confirm how far core.py actually goes and correct "Eq 1 to 13" if needed. -->
+Script numbers follow the Supplementary Information rather than running consecutively, which is why the set is s1, s2, s3 and s9.
 
 ---
 
@@ -85,7 +82,7 @@ For convenience `data/derived/cov_MOTOR_matrix.csv` holds the same 100 by 100 ar
 
 ## Reproducibility notes
 
-- **Seeds are fixed and reported.** The simulated ensembles use seeds 42 to 141 at one hundred realisations, and Supplementary Table 8 uses seeds 42 to 101 at sixty. <!-- CHECK: sixty realisations is the matched-null table, which the current SI numbers as Table 6. -->
+- **Seeds are fixed and reported.** The simulated ensembles use seeds 42 to 141 at one hundred realisations, and Supplementary Table 6 uses seeds 42 to 101 at sixty.
 - **Disconnected realisations.** The eigenvector calculation uses the largest connected component, because the leading eigenvector is not unique otherwise, while the degree statistics, the heterogeneity and the assortativity use the full generated graph. The two are read from different objects within one realisation. This is stated because it affects exact reproduction.
 - **Rounding.** Eigenvector shares are rounded to twelve decimal places before use. The solver returns values that differ in the last digits between runs, and the figures draw colours from them, so without the rounding the same script renders two images that differ by a level of grey. Twelve decimals leaves eight significant figures on the smallest share in any figure and moves every reported entropy by less than 1e-12 bits.
 
@@ -93,7 +90,7 @@ For convenience `data/derived/cov_MOTOR_matrix.csv` holds the same 100 by 100 ar
 
 ## Two things a reader should know
 
-**The scale-free column of Supplementary Table 8.** <!-- CHECK: table number, see above --> The values printed in that column of the current Supplementary Information come from a Barabasi-Albert graph grown from a bare seed at three links per node, which does not hold the link budget the other three columns hold. `code/s3_matched_nulls.py` prints both that form and the matched form of Supplementary Note 2 side by side, so the difference is on the record rather than buried.
+**The scale-free column of Supplementary Table 6.** The values printed in that column of the current Supplementary Information come from a Barabasi-Albert graph grown from a bare seed at three links per node, which does not hold the link budget the other three columns hold. `code/s3_matched_nulls.py` prints both that form and the matched form of Supplementary Note 2 side by side, so the difference is on the record rather than buried.
 
 **The cortical threshold sweep.** The compression column of `cortical_threshold_sweep.csv` is computed against the logarithm of the number of regions that remain connected at that threshold, not against log2 of 100. The two agree from 1200 links upward, where every region stays connected. The value the paper reports, at every one of the 4950 pairs and with no threshold imposed, is unaffected.
 
