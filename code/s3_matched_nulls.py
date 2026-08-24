@@ -4,7 +4,7 @@ topologies run at its own size, sixty realisations per cell, compression 1 - J.
 Two columns of results are printed, and the difference between them is on the
 record rather than buried.
 
-    matched     the generators of SI Appendix section 2, which hold the link
+    matched     the generators of Supplementary Note 2, which hold the link
                 budget wherever the size allows it
     bare        the superseded scale-free form, grown from a bare seed at three
                 links per node at every size
