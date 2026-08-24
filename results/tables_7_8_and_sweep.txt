@@ -1,0 +1,43 @@
+================================================================================================
+SUPPLEMENTARY TABLE 7   five measured coordinative structures
+================================================================================================
+system                  N         H    log2 N        J       2^H   hub %  uniform %
+Football               11    3.3875    3.4594   0.9792     10.47    15.8        9.1
+Basketball              5    2.2314    2.3219   0.9610      4.70    31.6       20.0
+    note: mean of sixteen team entropies, SD 0.0477; the profile drawn is the averaged one at 2.2620 bits
+Handball                6    2.2829    2.5850   0.8832      4.87    28.8       16.7
+Cortical activity     100    6.5468    6.6439   0.9854     93.49     1.8        1.0
+Musculoskeletal       270    7.7369    8.0768   0.9579    213.33     1.8        0.4
+
+Volleyball is uniform by the rotation rule, so its control entropy is log2 6 = 2.5850 bits at evenness exactly one.
+
+================================================================================================
+SUPPLEMENTARY TABLE 8   outcome entropy in the expertise data
+================================================================================================
+   novice  mean SD 2.418 cm   h 3.316 +/- 0.126 bits   range 3.10 to 3.51
+   expert  mean SD 0.987 cm   h 2.021 +/- 0.154 bits   range 1.78 to 2.26
+   difference from the group mean SDs      1.293 bits
+   difference of the per-participant means 1.295 bits
+   predictability ratio 2.454, groups apart by 0.836 bits
+
+   The mean absolute error column of Supplementary Table 8 is not derived
+   It is not present in expertise_outcome_entropy.csv or in any other
+   released file, and the source publication for this dataset is
+   recorded in Supplementary Note 5.
+
+================================================================================================
+SUPPLEMENTARY NOTE 4   the cortical threshold sweep
+================================================================================================
+ links_kept  mean_degree  regions_connected   H_bits        J  compression_1_minus_J  effective_count_2H
+        300          6.0                 84 5.473236 0.856221               0.143779             44.4230
+        600         12.0                 97 5.815405 0.881134               0.118866             56.3133
+       1200         24.0                100 6.154662 0.926369               0.073631             71.2423
+       2475         49.5                100 6.438318 0.969063               0.030937             86.7215
+       4950         99.0                100 6.546752 0.985384               0.014616             93.4908
+
+   Note on the compression column. It is computed against log2 of the
+   number of regions that remain connected at that threshold, not
+   against log2 of 100. The two agree from 1200 links upward, where
+   every region stays connected. At 300 links a fixed ceiling of
+   log2 100 would give 0.1762 rather than 0.1438, and at 600 links
+   0.1247 rather than 0.1189.
