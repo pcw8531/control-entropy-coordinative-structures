@@ -1,6 +1,6 @@
 """s2. The five measured coordinative structures and the expertise data.
 
-Behind SI Appendix section 4, section 5, Table S6 and Table S7, and behind the
+Behind SUPPLEMENTARY TABLE 7, section 5, Table S6 and Table S7, and behind the
 upper row of Figure 4. Everything here is read from a released file or from a
 published table transcribed into one; nothing was collected for this paper.
 """
