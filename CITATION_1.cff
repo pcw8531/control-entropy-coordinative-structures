@@ -1,0 +1,71 @@
+cff-version: 1.2.0
+title: >-
+  Average information across a network measures what a coordinative
+  structure buys in motor control. Code and data.
+message: If you use this software or these data, please cite the paper.
+type: software
+abstract: >-
+  Code and derived data behind the paper. A verification gate checks the size
+  and hash of every released input, recomputes every value the paper prints,
+  and reports 75 of 75 reproducing. No data were collected for this study;
+  every measured value comes from a published table or a released file.
+authors:
+  - family-names: Park
+    given-names: Chulwook
+    orcid: https://orcid.org/0000-0001-8714-5760
+    affiliation: >-
+      Department of Physical Education, Seoul National University,
+      Seoul, Republic of Korea
+license: MIT
+version: 1.1.0
+doi: 10.5281/zenodo.21789488
+date-released: 2026-08-24
+url: >-
+  https://github.com/pcw8531/control-entropy-coordinative-structures
+repository-code: >-
+  https://github.com/pcw8531/control-entropy-coordinative-structures
+keywords:
+  - coordinative structure
+  - network topologies
+  - degree of freedom
+  - information theory
+  - motor control and learning
+references:
+  - type: data
+    title: >-
+      Structure, function, and control of the musculoskeletal network - Data
+    authors:
+      - family-names: Murphy
+        given-names: Andrew C.
+      - family-names: Muldoon
+        given-names: Sarah F.
+      - family-names: Baker
+        given-names: David
+      - family-names: Lastowka
+        given-names: Adam
+      - family-names: Bennett
+        given-names: Brittany
+      - family-names: Yang
+        given-names: Muzhi
+      - family-names: Bassett
+        given-names: Danielle S.
+    doi: 10.5281/zenodo.1069104
+    license: CC-BY-SA-4.0
+  - type: article
+    title: Quantifying the compressibility of the human brain
+    authors:
+      - family-names: Weaver
+        given-names: Nicholas J.
+      - family-names: Faskowitz
+        given-names: Joshua
+      - family-names: Betzel
+        given-names: Richard F.
+      - family-names: Lynn
+        given-names: Christopher W.
+    journal: Proceedings of the National Academy of Sciences
+    volume: 123
+    year: 2026
+    notes: >-
+      The cov_MOTOR covariance file was taken from the task_covs release at
+      github.com/NicholasJWeaver/BrainCompressibility2025, which declares no
+      licence and is therefore not redistributed here.
