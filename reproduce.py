@@ -4,7 +4,6 @@
     python reproduce.py --gate     the gate alone, about a minute
 """
 import hashlib
-import json
 import subprocess
 import sys
 from pathlib import Path
@@ -14,38 +13,26 @@ CODE = ROOT / 'code'
 CORE_MARK = '# CORE  -  Equations 1 to 13'
 
 
-def core_cell_hashes():
-    """The Methods states that the equation module is byte-identical across the
-    analysis notebooks and verified by hash. This checks it.
+def module_digest():
+    """One definition stands behind every number in the paper. This prints the
+    hash of the equation module so a reader can confirm the copy they hold is
+    the copy the values were computed from.
 
-    Three notebooks do not carry the module. fig4_bottom_layer, fig5_publication
-    and fig_S3_checks define the measures they need locally, so that each runs
-    standalone. Those local definitions are checked against the module below
-    rather than assumed to agree.
+    The notebooks that draw the figures and the movie are not part of this
+    deposit. They arrange values these scripts compute; nothing is calculated
+    in them that is not calculated here.
     """
     def digest(text):
         return hashlib.sha256(text[text.index(CORE_MARK):].rstrip().encode()
                               ).hexdigest()[:16]
 
-    carries, standalone = {}, []
-    carries['core.py'] = digest((CODE / 'core.py').read_text())
-    for nb_path in sorted((CODE / 'notebooks').glob('*.ipynb')):
-        nb = json.loads(nb_path.read_text())
-        found = False
-        for c in nb['cells']:
-            src = ''.join(c['source'])
-            if CORE_MARK in src:
-                carries[nb_path.name] = digest(src)
-                found = True
-                break
-        if not found:
-            standalone.append(nb_path.name)
-    return carries, standalone
+    return digest((CODE / 'core.py').read_text())
 
 
 def local_definitions_agree():
-    """The standalone notebooks define share, entropy, evenness and Gini inline.
-    Check those definitions return what the module returns."""
+    """An independent re-implementation of share, entropy, evenness and Gini,
+    written inline here, must return what the module returns. This catches a
+    module that has been edited without the values being recomputed."""
     import numpy as np
     sys.path.insert(0, str(CODE))
     from core import share, shannon_entropy, evenness, gini
@@ -90,22 +77,10 @@ def main():
     print('=' * 100)
     print('THE EQUATION MODULE, one definition behind every number')
     print('=' * 100)
-    carries, standalone = core_cell_hashes()
-    for name, digest in carries.items():
-        print(f'  {name:<44} {digest}')
-    identical = len(set(carries.values())) == 1
-    print(f'  identical across {len(carries)} files: {identical}')
-    if not identical:
-        print('  >>> the module has drifted between files. Fix before trusting anything.')
-    if standalone:
-        print()
-        print('  These notebooks define their measures locally rather than carrying')
-        print('  the module, so that each runs standalone:')
-        for name in standalone:
-            print(f'    {name}')
-        worst = local_definitions_agree()
-        print(f'  largest disagreement between the local definitions and the '
-              f'module, over 500 random distributions: {worst:.2e}')
+    print(f"  core.py                                      {module_digest()}")
+    worst = local_definitions_agree()
+    print(f'  largest disagreement between an independent inline definition and')
+    print(f'  the module, over 500 random distributions: {worst:.2e}')
 
     code = run('verify_published_values.py')
     if code != 0:
