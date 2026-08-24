@@ -1,0 +1,48 @@
+Twelve changed files, ready to upload to
+github.com/pcw8531/control-entropy-coordinative-structures
+
+Drag the CONTENTS of this folder into GitHub, Add file > Upload files.
+The code/ and results/ folders must keep their names so the paths match.
+Delete _UPLOAD_NOTES.txt before dragging, or delete it from the repo after.
+
+TWO FILES MUST BE DELETED BY HAND ON GITHUB, uploading cannot remove them:
+    results/table_S8_matched_vs_bare.txt
+    results/tables_S6_S7_and_sweep.txt
+Open each, then the three-dot menu at the top right, Delete file, commit.
+
+WHAT CHANGED
+  Only printed labels, docstrings and two internal function names. No formula,
+  no seed, no threshold, no numeric constant was touched.
+
+  Supplementary numbering, applied everywhere:
+      S1 to S5  ->  Supplementary Tables 1 to 5   (unchanged position)
+      S6        ->  Supplementary Table 7
+      S7        ->  Supplementary Table 8
+      S8        ->  Supplementary Table 6
+      S9        ->  Supplementary Table 9         (unchanged position)
+      SI section N -> Supplementary Note N
+      SI Appendix section 2 -> Supplementary Note 2
+
+  s1_ensembles.py    table_s5() renamed table_accuracy()
+  s2_measured.py     table_s6() renamed table_measured()
+                     table_s7() renamed table_expertise()
+                     docstring repaired, it had mixed old and new labels
+                     the note about the source publication no longer says
+                     "still to be supplied", since the manuscript now cites it
+  reproduce.py       the block that hashed the equation module across figure
+                     notebooks has been replaced. Those notebooks are not in
+                     this deposit, so the block reported nothing and its
+                     docstring named three files a reader could not find. It
+                     now prints the module hash and keeps the independent
+                     inline re-implementation check, which is the part that
+                     actually tests anything.
+  requirements.txt   floors unchanged, header records the exact versions the
+                     gate was last verified on
+  results/*.txt      regenerated, renamed to the new table numbers
+  checksums.sha256   recomputed, 29 entries, all verify
+
+VERIFIED IN A CLEAN CONTAINER
+  Python 3.11.15, numpy 2.4.4, networkx 3.6.1, pandas 3.0.2, scipy 1.17.1,
+  matplotlib 3.10.9, scikit-learn 1.8.0
+      python reproduce.py     exit 0, 75 of 75 values reproduce
+      sha256 check            29 of 29 match

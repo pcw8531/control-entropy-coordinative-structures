@@ -1,0 +1,10 @@
+# Minimum versions. The gate passes across a wide range, and was last verified
+# on Python 3.11.15 with numpy 2.4.4, networkx 3.6.1, pandas 3.0.2,
+# scipy 1.17.1, matplotlib 3.10.9 and scikit-learn 1.8.0, reporting
+# 75 of 75 values reproducing.
+numpy>=1.24
+networkx>=3.0
+pandas>=2.0
+scipy>=1.10
+matplotlib>=3.7
+scikit-learn>=1.3
