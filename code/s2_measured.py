@@ -19,7 +19,7 @@ POSITIONS = ['PG', 'SG', 'SF', 'PF', 'CN']
 
 
 def eigen_shares_matrix(A):
-    """Eq 3 on a weighted adjacency matrix."""
+    """Eq 7 on a weighted adjacency matrix."""
     w, v = np.linalg.eigh(A)
     return share(np.abs(v[:, np.argmax(w)]))
 
