@@ -30,7 +30,7 @@ PROVENANCE = {
     'muscle_degree_counts.csv': (499, 'f331e4fd5fcebd7f'),
     'musculoskeletal_coupling_shares.csv': (8119, 'f263f68a371ab8a7'),
     'musculoskeletal_random_null_shares.csv': (5440, 'bf040ad84443ac00'),
-    'expertise_outcome_entropy.csv': (906, '6125d71889dcf310'),
+    'expertise_outcome_entropy.csv': (919, 'e6053f27c343bca0'),
 }
 
 EXTERNAL_PROVENANCE = {

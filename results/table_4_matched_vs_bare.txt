@@ -1,0 +1,44 @@
+core loaded: v5 / 24 July 2026 (Methods Eq 1-13)
+========================================================================================================
+SUPPLEMENTARY TABLE 4   sixty realisations per cell, seeds 42 to 101
+========================================================================================================
+
+Basketball, N = 5, stated mean degree 4, link budget 10
+    regular          0.0000 +/- 0.0000
+    small-world      0.0000 +/- 0.0000
+    random           0.0000 +/- 0.0000
+    scale-free           --   no scale-free ensemble at this density, cell left empty
+    scale-free       0.0275 +/- 0.0056  [6 links]   superseded bare-seed form, for the record, not used in Supplementary Table 4
+    measured 0.0390   no matched scale-free ensemble
+
+Handball, N = 6, stated mean degree 4, link budget 12
+    regular          0.0000 +/- 0.0000
+    small-world      0.0034 +/- 0.0029
+    random           0.0065 +/- 0.0033
+    scale-free           --   no scale-free ensemble at this density, cell left empty
+    scale-free       0.0262 +/- 0.0092  [9 links]   superseded bare-seed form, for the record, not used in Supplementary Table 4
+    measured 0.1168   no matched scale-free ensemble
+
+Football, N = 11, stated mean degree 6, link budget 33
+    regular         -0.0000 +/- 0.0000
+    small-world      0.0037 +/- 0.0022
+    random           0.0088 +/- 0.0039
+    scale-free       0.0249 +/- 0.0008  [7-element ring seed]
+    scale-free       0.0224 +/- 0.0062  [24 links]   superseded bare-seed form, for the record, not used in Supplementary Table 4
+    measured 0.0208   0.84x the matched scale-free ensemble, 0.93x the bare-seed one
+
+Cortical activity, N = 100, stated mean degree 6, link budget 300
+    regular          0.0000 +/- 0.0000
+    small-world      0.0090 +/- 0.0040
+    random           0.0236 +/- 0.0038
+    scale-free       0.0492 +/- 0.0020  [12-element ring seed]
+    scale-free       0.0475 +/- 0.0033  [291 links]   superseded bare-seed form, for the record, not used in Supplementary Table 4
+    measured 0.0146   0.30x the matched scale-free ensemble, 0.31x the bare-seed one
+
+Musculoskeletal, N = 270, stated mean degree 6, link budget 810
+    regular          0.0000 +/- 0.0000
+    small-world      0.0097 +/- 0.0026
+    random           0.0225 +/- 0.0022
+    scale-free       0.0556 +/- 0.0018  [12-element ring seed]
+    scale-free       0.0549 +/- 0.0028  [801 links]   superseded bare-seed form, for the record, not used in Supplementary Table 4
+    measured 0.0421   0.76x the matched scale-free ensemble, 0.77x the bare-seed one

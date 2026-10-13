@@ -1,4 +1,5 @@
-"""s1. The simulated ensembles behind Table 1, Figure 3 and Supplementary Tables 1 to 5.
+"""s1. The simulated ensembles behind Table 1, Figure 3, Supplementary Note 1 and
+Supplementary Tables 1 to 3.
 
 Run directly to print every table. Results are written to results/ as CSV.
 """
@@ -37,17 +38,18 @@ def degree_shares(G):
     return share(np.array([d for _, d in G.degree()], float))
 
 
-def ensemble(kind, N=100, kmean=6, seeds=SEEDS):
+def ensemble(kind, N=100, kmean=6, seeds=SEEDS, seed_size=None):
     """One ensemble, every statistic the tables report."""
-    out = dict(H=[], Hdeg=[], kappa=[], r=[], gini=[], k=[], links=[])
+    out = dict(H=[], Hdeg=[], kappa=[], sdk=[], r=[], gini=[], k=[], links=[])
     for s in seeds:
-        full = make(kind, N, kmean, s)
+        full = make(kind, N, kmean, s, seed_size)
         big = giant(full)
         p = eigen_shares(big)
         out['H'].append(shannon_entropy(p))
         out['Hdeg'].append(shannon_entropy(degree_shares(big)))
         out['gini'].append(gini(p))
         out['kappa'].append(degree_heterogeneity(full))
+        out['sdk'].append(np.std([d for _, d in full.degree()]))
         out['r'].append(degree_assortativity(full))
         out['k'].append(2 * full.number_of_edges() / full.number_of_nodes())
         out['links'].append(full.number_of_edges())
@@ -67,19 +69,21 @@ def table_1(N=100, kmean=6, seeds=SEEDS):
                          gini=e['gini'].mean(), mean_degree=e['k'].mean(),
                          links=e['links'].mean(),
                          r=finite.mean() if finite.size else float('nan'),
-                         H_sd=e['H'].std(ddof=1)))
+                         H_sd=e['H'].std(ddof=1), sd_k=e['sdk'].mean(),
+                         r_sd=finite.std(ddof=1) if finite.size > 1 else float('nan')))
     return rows
 
 
 def _print(rows, ceil):
-    head = (f'{"Topology":<20}{"H":>9}{"J":>9}{"2^H":>8}{"dH":>8}{"kappa":>8}'
-            f'{"H deg":>9}{"Gini":>8}{"<k>":>7}{"links":>7}{"r":>9}')
+    head = (f'{"Topology":<20}{"H":>9}{"J":>9}{"2^H":>8}{"dH":>8}{"kappa":>8}{"sd k":>7}'
+            f'{"H deg":>9}{"Gini":>8}{"<k>":>7}{"links":>7}{"r":>11}{"r sd":>7}')
     print(head)
     for r in rows:
         rr = 'undefined' if not np.isfinite(r['r']) else f'{r["r"]:.2f}'
+        rs = '' if not np.isfinite(r['r_sd']) else f'{r["r_sd"]:.2f}'
         print(f'{r["topology"]:<20}{r["H"]:>9.4f}{r["J"]:>9.4f}{r["D_eff"]:>8.1f}'
-              f'{r["dH"]:>8.3f}{r["kappa"]:>8.2f}{r["H_degree"]:>9.4f}'
-              f'{r["gini"]:>8.3f}{r["mean_degree"]:>7.2f}{r["links"]:>7.1f}{rr:>9}')
+              f'{r["dH"]:>8.3f}{r["kappa"]:>8.2f}{r["sd_k"]:>7.2f}{r["H_degree"]:>9.4f}'
+              f'{r["gini"]:>8.3f}{r["mean_degree"]:>7.2f}{r["links"]:>7.1f}{rr:>11}{rs:>7}')
     print(f'ceiling log2 N = {ceil:.4f} bits')
 
 
@@ -97,10 +101,12 @@ def main():
         w.writerows(rows)
 
     print()
-    print('SUPPLEMENTARY TABLE 2   control entropy across network size, mean degree 6')
+    print('SUPPLEMENTARY TABLE 2   control entropy across network size, mean degree 6,')
+    print('   100 realisations at each size and 50 at N = 500')
     print(f'{"N":>6}' + ''.join(f'{LABEL[k]:>20}' for k in KINDS))
     for N in (50, 100, 200, 500):
-        vals = [ensemble(k, N, 6)['H'].mean() for k in KINDS]
+        seeds = range(42, 92) if N == 500 else SEEDS
+        vals = [ensemble(k, N, 6, seeds)['H'].mean() for k in KINDS]
         print(f'{N:>6}' + ''.join(f'{v:>20.4f}' for v in vals))
 
     print()
@@ -111,14 +117,14 @@ def main():
         print(f'{km:>6}' + ''.join(f'{v:>20.4f}' for v in vals))
 
     print()
-    print('SUPPLEMENTARY TABLE 4   the two coupling weightings, N = 100')
+    print('SUPPLEMENTARY TABLE 1, continued   the two coupling weightings, N = 100')
     print(f'{"weighting":>12}' + ''.join(f'{LABEL[k]:>20}' for k in KINDS))
     ens = {k: ensemble(k) for k in KINDS}
     print(f'{"degree":>12}' + ''.join(f'{ens[k]["Hdeg"].mean():>20.4f}' for k in KINDS))
     print(f'{"eigenvector":>12}' + ''.join(f'{ens[k]["H"].mean():>20.4f}' for k in KINDS))
 
     print()
-    print('SUPPLEMENTARY NOTE 3   bootstrap intervals and the separation')
+    print('SUPPLEMENTARY NOTE 1   bootstrap intervals and the separation')
     rng = np.random.default_rng(1)
     for k in KINDS:
         v = ens[k]['H']
@@ -131,15 +137,17 @@ def main():
           f'Cohen d {(a.mean()-b.mean())/sp:.2f}')
 
     print()
-    print('SUPPLEMENTARY TABLE 5   five-fold accuracy from a single feature, four classes')
+    print('SUPPLEMENTARY NOTE 1   five-fold accuracy from a single feature, four classes')
     try:
         table_accuracy(ens)
     except ImportError:
         print('   scikit-learn is not installed, skipped')
 
     print()
-    print('RESULTS TEXT   the same four generators at 13 elements and 26 links')
-    vals = [ensemble(k, 13, 4)['H'].mean() / max_entropy(13) for k in KINDS]
+    print('SECTION 3.2 and SUPPLEMENTARY NOTE 1   the same four generators at 13 elements')
+    print('   and 26 links, the scale-free ensemble grown from a six-element ring seed')
+    vals = [ensemble(k, 13, 4, seed_size=6 if k == 'scale-free' else None)['H'].mean()
+            / max_entropy(13) for k in KINDS]
     print('   evenness ' + '  '.join(f'{v:.4f}' for v in vals))
 
 
@@ -170,6 +178,18 @@ def table_accuracy(ens=None):
         e = 100 * cross_val_score(mdl, X_h, y, cv=cv).mean()
         kk = 100 * cross_val_score(mdl, X_k, y, cv=cv).mean()
         print(f'   {nm:<22}{e:>16.1f}{kk:>14.1f}')
+
+    # The lower logistic figure for kappa comes from the default penalty, not from
+    # overlap: the kappa ranges are disjoint, and a weakly penalised logistic
+    # reader separates them almost perfectly (Supplementary Note 1).
+    weak = make_pipeline(StandardScaler(), LogisticRegression(C=1e6, max_iter=100000))
+    e = 100 * cross_val_score(weak, X_h, y, cv=cv).mean()
+    kk = 100 * cross_val_score(weak, X_k, y, cv=cv).mean()
+    print(f'   {"Logistic, C = 1e6":<22}{e:>16.1f}{kk:>14.1f}')
+    print('   kappa range in each ensemble')
+    for k in KINDS:
+        v = ens[k]['kappa']
+        print(f'      {LABEL[k]:<20}{v.min():>8.3f} to {v.max():.3f}')
 
 
 if __name__ == '__main__':

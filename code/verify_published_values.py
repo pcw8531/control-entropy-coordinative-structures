@@ -114,7 +114,7 @@ def main():
 
     print()
     print('=' * 92)
-    print('THE LEADER-FOLLOWER CLOSED FORM, Eq 9')
+    print('THE LEADER-FOLLOWER CLOSED FORM, Eq 15')
     print('=' * 92)
     fb = np.sort(p_fb)[::-1]
     hb = np.sort(p_hb)[::-1]
@@ -126,7 +126,7 @@ def main():
     chk('basketball, one leader, averaged over teams',
         float(np.mean([two_level_entropy(5, 1, np.sort(p)[::-1][0]) for p in pt])),
         2.2580, unit='bits')
-    chk('volleyball, uniform by rule', max_entropy(6), 2.5850, unit='bits')
+    chk('handball ceiling, log2 6', max_entropy(6), 2.5850, unit='bits')
 
     print()
     print('=' * 92)

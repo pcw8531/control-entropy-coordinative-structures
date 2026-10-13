@@ -1,8 +1,12 @@
-"""s9 and s10. Supplementary Table 9 and the lower row of Figure 4.
+"""s9 and s10. Supplementary Note 4, Supplementary Table 7, Supplementary Fig. 1
+and the lower row of Figure 4.
 
 Sections A and B resample the units each measured value rests on. Section C
 covers the two sports published as a single profile, which have no unit to
-resample and so meet a null generated at their own size and mean degree.
+resample and so meet a null of random graphs at their own size and at the mean
+degree of Supplementary Table 4, six for football and four for handball. Because
+a published profile fixes no mean degree, a density check repeats the football
+null at mean degree four.
 
 The routine reproduces every published value from the released files before it
 resamples anything, and stops if any of them fails.
@@ -87,29 +91,42 @@ def section_a_and_b():
     return out
 
 
+def random_graph_null(N, kmean, draws=10000):
+    """Compression of random graphs at a fixed link count, seeds 0 to draws - 1."""
+    vals = []
+    for s in range(draws):
+        G = nx.gnm_random_graph(N, N * kmean // 2, seed=s)
+        if not nx.is_connected(G):
+            G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+        if G.number_of_nodes() < 3:
+            continue
+        c = nx.eigenvector_centrality_numpy(G)
+        p = share(np.round(np.abs(np.array([c[n] for n in G.nodes()], float)), 12))
+        vals.append(comp(p))
+    return np.array(vals)
+
+
 def section_c(draws=10000):
     out = {}
     for name, N, kmean, obs in [('Handball', 6, 4, comp(sport_shares('Handball'))),
                                 ('Football', 11, 6, comp(sport_shares('Football')))]:
-        vals = []
-        for s in range(draws):
-            G = nx.gnm_random_graph(N, N * kmean // 2, seed=s)
-            if not nx.is_connected(G):
-                G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
-            if G.number_of_nodes() < 3:
-                continue
-            c = nx.eigenvector_centrality_numpy(G)
-            p = share(np.round(np.abs(np.array([c[n] for n in G.nodes()], float)), 12))
-            vals.append(comp(p))
-        vals = np.array(vals)
+        vals = random_graph_null(N, kmean, draws)
         out[name] = dict(obs=obs, ci=np.percentile(vals, [2.5, 97.5]),
                          above=100 * (vals < obs).mean(), draws=len(vals), null=vals)
     return out
 
 
+def density_check(draws=10000):
+    """Supplementary Note 4. The football null again, at mean degree four rather than six."""
+    obs = comp(sport_shares('Football'))
+    vals = random_graph_null(11, 4, draws)
+    return dict(obs=obs, ci=np.percentile(vals, [2.5, 97.5]),
+                above=100 * (vals < obs).mean(), draws=len(vals))
+
+
 def main():
     print('=' * 96)
-    print('SUPPLEMENTARY TABLE 9 A and B   resampling the units each value rests on')
+    print('SUPPLEMENTARY TABLE 7 A and B   resampling the units each value rests on')
     print('=' * 96)
     v = section_a_and_b()
     b = v['basketball']
@@ -134,15 +151,22 @@ def main():
 
     print()
     print('=' * 96)
-    print('SUPPLEMENTARY TABLE 9 C   the two single published profiles against a matched null')
+    print('SUPPLEMENTARY TABLE 7 C   the two single published profiles against a matched null')
     print('=' * 96)
     for name, d in section_c().items():
         print(f'   {name:<10} observed {d["obs"]:.4f}   null 95% '
               f'[{max(d["ci"][0], 0):.4f}, {d["ci"][1]:.4f}]   '
               f'above {d["above"]:.1f} per cent of {d["draws"]:,} draws')
 
+    d = density_check()
+    print(f'   density check, Supplementary Note 4: football against the same null at mean '
+          f'degree four')
+    print(f'   {"Football":<10} observed {d["obs"]:.4f}   null 95% '
+          f'[{max(d["ci"][0], 0):.4f}, {d["ci"][1]:.4f}]   '
+          f'above {d["above"]:.1f} per cent of {d["draws"]:,} draws')
+
     print()
-    print('SUPPLEMENTARY TABLE 9 D   Gini beside the entropy reading')
+    print('SUPPLEMENTARY TABLE 7 D   Gini beside the entropy reading')
     teams, prof = basketball_profiles()
     for nm, p in (('Football', sport_shares('Football')),
                   ('Handball', sport_shares('Handball')),

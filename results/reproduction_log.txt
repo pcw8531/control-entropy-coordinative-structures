@@ -2,12 +2,14 @@
 THE EQUATION MODULE, one definition behind every number
 ====================================================================================================
   core.py                                      4396e1f5e8e81404
+core loaded: v5 / 24 July 2026 (Methods Eq 1-13)
   largest disagreement between an independent inline definition and
   the module, over 500 random distributions: 3.55e-15
 
 ####################################################################################################
 # verify_published_values.py
 ####################################################################################################
+core loaded: v5 / 24 July 2026 (Methods Eq 1-13)
 ============================================================================================
 PROVENANCE
 ============================================================================================
@@ -19,7 +21,7 @@ PROVENANCE
   OK  muscle_degree_counts.csv                        499 bytes  sha256 f331e4fd5fcebd7f
   OK  musculoskeletal_coupling_shares.csv            8119 bytes  sha256 f263f68a371ab8a7
   OK  musculoskeletal_random_null_shares.csv         5440 bytes  sha256 bf040ad84443ac00
-  OK  expertise_outcome_entropy.csv                   906 bytes  sha256 6125d71889dcf310
+  OK  expertise_outcome_entropy.csv                   919 bytes  sha256 e6053f27c343bca0
   --  cov_MOTOR                                  not fetched, skipped
   OK  fig2e.csv                                       135 bytes  sha256 516bfd49deeeae4e
 
@@ -73,14 +75,14 @@ EXPERTISE
   OK  Cohen d                                                  9.1893   printed     9.1900 
 
 ============================================================================================
-THE LEADER-FOLLOWER CLOSED FORM, Eq 9
+THE LEADER-FOLLOWER CLOSED FORM, Eq 15
 ============================================================================================
   OK  football, one leader                                     3.4265   printed     3.4265 bits
   OK  handball, one leader                                     2.5195   printed     2.5195 bits
   OK  handball, three leaders, combined share                  0.8061   printed     0.8060 
   OK  handball, three leaders                                  2.2946   printed     2.2946 bits
   OK  basketball, one leader, averaged over teams              2.2580   printed     2.2580 bits
-  OK  volleyball, uniform by rule                              2.5850   printed     2.5850 bits
+  OK  handball ceiling, log2 6                                 2.5850   printed     2.5850 bits
 
 ============================================================================================
 THE SIMULATED ENSEMBLES, Table 1
