@@ -1,6 +1,6 @@
 """Run everything, in order, and report.
 
-    python reproduce.py            the gate plus every table
+    python reproduce.py            the gate, then s1, s2, s3 and s9
     python reproduce.py --gate     the gate alone, about a minute
 """
 import hashlib
@@ -18,9 +18,9 @@ def module_digest():
     hash of the equation module so a reader can confirm the copy they hold is
     the copy the values were computed from.
 
-    The notebooks that draw the figures and the movie are not part of this
-    deposit. They arrange values these scripts compute; nothing is calculated
-    in them that is not calculated here.
+    Three notebooks are part of this deposit and run on their own: s11, behind
+    Section 3.4, and the notebooks that draw Figure 5 and Supplementary Video 1.
+    The code that draws the other figures is not included.
     """
     def digest(text):
         return hashlib.sha256(text[text.index(CORE_MARK):].rstrip().encode()
