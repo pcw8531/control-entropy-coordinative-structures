@@ -1,23 +1,21 @@
 # Source manifest
 
-Every input file used in *Average information across a network measures what a coordinative structure buys in motor control*.
+Every input file used in *Average information across a network quantifies what a coordinative structure achieves in motor control*.
 
-**No data were collected for this study.** Each entry below gives the origin, the access route, the file as received, and the licence under which it is used. Reference numbers are those of the manuscript reference list.
+**No data were collected for this study.** Each entry below gives the origin, the access route, the file as received, and the licence or basis under which it is used.
 
 ---
 
 ## Inputs
 
-| Ref | Provides | Source | Accessed as | Licence |
-| --- | --- | --- | --- | --- |
-| 27 | Football, position centrality, 2014 World Cup knockout stage | Korte & Lames (2018), *Curr. Issues Sport Sci.* **3**, 005 | Transcribed from a printed table. No file was released. | *to be completed* |
-| 28 | Basketball, position centrality, 2010 season, published team by team | Fewell, Armbruster, Ingraham, Petersen & Waters (2012), *PLoS ONE* **7**, e47445 | Transcribed from a printed table. No file was released. | *to be completed* |
-| 29 | Cortical activity, Human Connectome Project motor task, 100 parcels | Weaver, Faskowitz, Betzel & Lynn (2026), *PNAS* **123**, e2531115123 | `cov_MOTOR` from the `task_covs` release at [BrainCompressibility2025](https://github.com/NicholasJWeaver/BrainCompressibility2025) | none declared at source |
-| 30 | Musculoskeletal network, 173 bones and 270 muscles | Murphy, Muldoon, Baker, Lastowka, Bennett, Yang & Bassett (2018), *PLoS Biol.* **16**, e2002811 | `fig2e.csv` from [Zenodo 1069104](https://doi.org/10.5281/zenodo.1069104) | CC BY-SA 4.0 |
-| 31 | Expert and novice outcome dispersion, perceptual accuracy task | Park (2026), *Inf. Process. Manag.* **64**, 104951 | Per-participant standard deviations read from the published table. | *to be completed* |
-| 44 | Handball, position centrality, positional attack passing analysis | Korte & Lames (2019), *J. Hum. Kinet.* **70**, 209–221 | Transcribed from a printed table. No file was released. | *to be completed* |
-
-Entries marked *to be completed* still need the page or table transcribed, the date of access, and the licence or permission basis.
+| Provides | Source | Accessed as | Licence or basis of use |
+| --- | --- | --- | --- |
+| Football, position centrality, 2014 World Cup knockout stage | Korte & Lames (2018), *Curr. Issues Sport Sci.* **3**, 005 | Transcribed from a printed table. No file was released. | Published values, used with citation |
+| Basketball, position centrality, 2010 play-offs, published team by team | Fewell, Armbruster, Ingraham, Petersen & Waters (2012), *PLoS ONE* **7**, e47445 | Transcribed from a printed table. No file was released. | Published values, used with citation |
+| Cortical activity, Human Connectome Project motor task, 100 parcels | Weaver, Faskowitz, Betzel & Lynn (2026), *PNAS* **123**, e2531115123 | `cov_MOTOR` from the `task_covs` release at [BrainCompressibility2025](https://github.com/NicholasJWeaver/BrainCompressibility2025) | none declared at source |
+| Musculoskeletal network, 173 bones and 270 muscles | Murphy, Muldoon, Baker, Lastowka, Bennett, Yang & Bassett (2018), *PLoS Biol.* **16**, e2002811 | `fig2e.csv` from [Zenodo 1069104](https://doi.org/10.5281/zenodo.1069104) | CC BY-SA 4.0 |
+| Expert and novice outcome dispersion, perceptual accuracy task | Park (2026a), *Inf. Process. Manag.* **64**, 104951 | Per-participant standard deviations read from Table D.1 of the published article. | Published values, used with citation |
+| Handball, position centrality, positional attack passing analysis | Korte & Lames (2019), *J. Hum. Kinet.* **70**, 209–221 | Transcribed from Table 1 of the article and checked against the original on 28 July 2026. No file was released. | Published values, used with citation |
 
 ---
 
@@ -42,13 +40,13 @@ The script verifies the size and hash above before use. For convenience `data/de
 
 ## Derived files
 
-Nine derived CSV files are produced from the inputs above by the scripts in `code/`. Each carries a comment header naming its origin.
+Ten derived CSV files are released. Nine are computed from the inputs above or transcribed from them, and each carries a comment header naming its origin. The tenth, `s11_controllability_checks.csv`, is written by the s11 notebook from the generated ensembles of Table 1.
 
 ```bash
 python code/verify_published_values.py
 ```
 
-That gate checks the size and hash of every released input, recomputes every value the paper prints, and exits non-zero if anything fails. A clean checkout reports **75 of 75 values reproducing**.
+That gate checks the size and hash of every released input, recomputes 75 published values behind Sections 3.1 to 3.3 and the behavioural check in Section 3.4, and exits non-zero if anything fails. A clean checkout reports **75 of 75 values reproducing**.
 
 ---
 
@@ -64,4 +62,4 @@ That gate checks the size and hash of every released input, recomputes every val
 
 ## Not an input
 
-StatsBomb open data (manuscript ref. 42) is named in the Methods as the release a specified-in-advance analysis will use. No value reported in this paper is computed from it, and it is not part of this deposit.
+StatsBomb open data (StatsBomb, n.d.) is named in the Methods as the release a specified-in-advance analysis will use. No value reported in this paper is computed from it, and it is not part of this deposit.

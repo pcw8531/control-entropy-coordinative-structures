@@ -1,13 +1,14 @@
 cff-version: 1.2.0
 title: >-
-  Average information across a network measures what a coordinative
-  structure buys in motor control. Code and data.
+  Average information across a network quantifies what a coordinative
+  structure achieves in motor control. Code and data.
 message: If you use this software or these data, please cite the paper.
 type: software
 abstract: >-
   Code and derived data behind the paper. A verification gate checks the size
-  and hash of every released input, recomputes every value the paper prints,
-  and reports 75 of 75 reproducing. No data were collected for this study;
+  and hash of every released input, recomputes 75 published values behind
+  Sections 3.1 to 3.3 and the behavioural check in Section 3.4, and reports
+  75 of 75 reproducing. No data were collected for this study;
   every measured value comes from a published table or a released file.
 authors:
   - family-names: Park
@@ -17,9 +18,9 @@ authors:
       Department of Physical Education, Seoul National University,
       Seoul, Republic of Korea
 license: MIT
-version: 1.1.0
+version: 1.2.0
 doi: 10.5281/zenodo.21789488
-date-released: 2026-08-24
+date-released: 2026-10-14
 url: >-
   https://github.com/pcw8531/control-entropy-coordinative-structures
 repository-code: >-
