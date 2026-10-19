@@ -21,7 +21,7 @@ PROVENANCE
   OK  muscle_degree_counts.csv                        499 bytes  sha256 f331e4fd5fcebd7f
   OK  musculoskeletal_coupling_shares.csv            8119 bytes  sha256 f263f68a371ab8a7
   OK  musculoskeletal_random_null_shares.csv         5440 bytes  sha256 bf040ad84443ac00
-  OK  expertise_outcome_entropy.csv                   919 bytes  sha256 e6053f27c343bca0
+  OK  expertise_outcome_entropy.csv                  1134 bytes  sha256 01debc235a4d5f30
   --  cov_MOTOR                                  not fetched, skipped
   OK  fig2e.csv                                       135 bytes  sha256 516bfd49deeeae4e
 
@@ -65,14 +65,14 @@ MEASURED STRUCTURES, from the released files
 ============================================================================================
 EXPERTISE
 ============================================================================================
-  OK  novice outcome entropy                                   3.3160   printed     3.3160 bits
-  OK  expert outcome entropy                                   2.0208   printed     2.0210 bits
-  OK  difference of per-participant means                      1.2952   printed     1.2950 bits
-  OK  difference from the group mean SDs                       1.2927   printed     1.2930 bits
-  OK  predictability ratio                                     2.4540   printed     2.4540 
-  OK  non-overlap                                              0.8355   printed     0.8360 bits
-  OK  t statistic                                             20.5478   printed    20.5500 
-  OK  Cohen d                                                  9.1893   printed     9.1900 
+  OK  novice outcome entropy                                   3.1061   printed     3.1060 bits
+  OK  expert outcome entropy                                   1.8222   printed     1.8220 bits
+  OK  difference in outcome entropy, Eq 12                     1.2839   printed     1.2840 bits
+  OK  predictability ratio                                     2.4350   printed     2.4350 
+  OK  F statistic on the two variances                         5.9294   printed     5.9300 
+  OK  two-sided p                                              0.0141   printed     0.0140 
+  OK  exact 95% interval, lower                                0.2793   printed     0.2790 bits
+  OK  exact 95% interval, upper                                2.2886   printed     2.2890 bits
 
 ============================================================================================
 THE LEADER-FOLLOWER CLOSED FORM, Eq 15
