@@ -148,26 +148,28 @@ def muscle_columns(draws=20000, seed=1):
 
 
 def table_expertise():
-    from scipy.stats import ttest_ind
+    """Eq 12 on the twenty published participant values, with the exact F test."""
+    from scipy.stats import f as f_dist
     nov, exp = expertise()
-    n_h = nov.outcome_entropy_h_bits.values
-    e_h = exp.outcome_entropy_h_bits.values
-    t_stat, p_value = ttest_ind(n_h, e_h)
-    pooled = np.sqrt((n_h.var(ddof=1) + e_h.var(ddof=1)) / 2)
+    x_n = nov.radial_error_cm.values
+    x_e = exp.radial_error_cm.values
+    sd_n, sd_e = float(x_n.std(ddof=1)), float(x_e.std(ddof=1))
+    diff = delta_outcome_entropy(sd_n, sd_e)
+    dfn, dfd = len(x_n) - 1, len(x_e) - 1
+    F = (sd_n / sd_e) ** 2
+    p = 2 * min(f_dist.sf(F, dfn, dfd), f_dist.cdf(F, dfn, dfd))
+    lo, hi = F / f_dist.ppf(0.975, dfn, dfd), F / f_dist.ppf(0.025, dfn, dfd)
     return dict(
-        t=float(t_stat), p=float(p_value), df=len(n_h) + len(e_h) - 2,
-        cohen_d=float((n_h.mean() - e_h.mean()) / pooled),
-        novice_mean_sd=float(nov.outcome_sd_cm.mean()),
-        expert_mean_sd=float(exp.outcome_sd_cm.mean()),
-        novice_h=float(n_h.mean()), novice_h_sd=float(n_h.std(ddof=1)),
-        expert_h=float(e_h.mean()), expert_h_sd=float(e_h.std(ddof=1)),
-        novice_range=(float(n_h.min()), float(n_h.max())),
-        expert_range=(float(e_h.min()), float(e_h.max())),
-        difference_group_sd=delta_outcome_entropy(
-            nov.outcome_sd_cm.mean(), exp.outcome_sd_cm.mean()),
-        difference_per_participant=float(n_h.mean() - e_h.mean()),
-        ratio=predictability_ratio(float(n_h.mean() - e_h.mean())),
-        non_overlap=float(n_h.min() - e_h.max()))
+        novice_mean=float(x_n.mean()), expert_mean=float(x_e.mean()),
+        novice_sd=sd_n, expert_sd=sd_e,
+        novice_h=float(outcome_entropy_gaussian(x_n.std(ddof=0))),
+        expert_h=float(outcome_entropy_gaussian(x_e.std(ddof=0))),
+        novice_h_column=float(nov.outcome_information_bits.mean()),
+        expert_h_column=float(exp.outcome_information_bits.mean()),
+        difference=diff, ratio=predictability_ratio(diff),
+        F=float(F), df=(dfn, dfd), p=float(p),
+        diff_ci=(0.5 * float(np.log2(lo)), 0.5 * float(np.log2(hi))),
+        ratio_ci=(float(np.sqrt(lo)), float(np.sqrt(hi))))
 
 
 def main():
@@ -211,24 +213,20 @@ def main():
     print('SUPPLEMENTARY TABLE 6   outcome entropy in the expertise data')
     print('=' * 96)
     t = table_expertise()
-    print(f'   novice  mean SD {t["novice_mean_sd"]:.3f} cm   '
-          f'h {t["novice_h"]:.3f} +/- {t["novice_h_sd"]:.3f} bits   '
-          f'range {t["novice_range"][0]:.2f} to {t["novice_range"][1]:.2f}')
-    print(f'   expert  mean SD {t["expert_mean_sd"]:.3f} cm   '
-          f'h {t["expert_h"]:.3f} +/- {t["expert_h_sd"]:.3f} bits   '
-          f'range {t["expert_range"][0]:.2f} to {t["expert_range"][1]:.2f}')
-    print(f'   difference from the group mean SDs      '
-          f'{t["difference_group_sd"]:.3f} bits, ratio of the mean SDs '
-          f'{t["novice_mean_sd"] / t["expert_mean_sd"]:.3f}')
-    print(f'   difference of the per-participant means '
-          f'{t["difference_per_participant"]:.3f} bits')
-    print(f'   predictability ratio {t["ratio"]:.3f}, '
-          f'groups apart by {t["non_overlap"]:.3f} bits')
-    print(f'   two-sided t test on the per-participant entropies, Supplementary Note 3: '
-          f't({t["df"]}) = {t["t"]:.2f}, p = {t["p"]:.1e}, Cohen d {t["cohen_d"]:.2f}')
+    print(f'   novice  mean RE {t["novice_mean"]:.2f} cm   SD {t["novice_sd"]:.3f} cm   '
+          f'h {t["novice_h"]:.3f} bits')
+    print(f'   expert  mean RE {t["expert_mean"]:.2f} cm   SD {t["expert_sd"]:.3f} cm   '
+          f'h {t["expert_h"]:.3f} bits')
+    print(f'   difference by Eq 12 {t["difference"]:.3f} bits, '
+          f'predictability ratio {t["ratio"]:.3f}')
+    print(f'   h is the mean information of the ten values under the Gaussian fitted by '
+          f'maximum likelihood, {t["novice_h_column"]:.3f} and {t["expert_h_column"]:.3f} '
+          f'bits from the released column')
+    print(f'   two-sided F test on the ratio of the two variances, Supplementary Note 3: '
+          f'F({t["df"][0]}, {t["df"][1]}) = {t["F"]:.2f}, p = {t["p"]:.3f}')
     print()
-    print('   The per-participant dispersions are those reported by Park (2026a),')
-    print('   as Supplementary Note 3 records.')
+    print('   The participant values are those of Appendix B of the supplementary material')
+    print('   of Park (2027), as Supplementary Note 3 records.')
 
     print()
     print('=' * 96)
