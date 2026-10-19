@@ -1,7 +1,8 @@
 """s9 and s10. Supplementary Note 4, Supplementary Table 7, Supplementary Fig. 1
 and the lower row of Figure 4.
 
-Sections A and B resample the units each measured value rests on. Section C
+Section A resamples the units each measured value rests on, and Section B gives
+the expertise difference its exact interval from the F distribution. Section C
 covers the two sports published as a single profile, which have no unit to
 resample and so meet a null of random graphs at their own size and at the mean
 degree of Supplementary Table 4, six for football and four for handball. Because
@@ -21,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from core import share, shannon_entropy, evenness, gini
 from s2_measured import (sport_shares, basketball_profiles, cortical_shares,
                          musculoskeletal_shares, musculoskeletal_null_shares,
-                         expertise, eigen_shares_matrix)
+                         table_expertise, eigen_shares_matrix)
 from loaders import read_matrix
 
 RNG = np.random.default_rng(20260803)
@@ -66,28 +67,9 @@ def section_a_and_b():
                           ratio_ci=np.percentile(bm / bn, [2.5, 97.5]),
                           boot=bm, boot_null=bn)
 
-    nov, exp = expertise()
-    n = nov.outcome_entropy_h_bits.values
-    e = exp.outcome_entropy_h_bits.values
-    d = n.mean() - e.mean()
-    bd = np.array([n[RNG.integers(0, 10, 10)].mean() - e[RNG.integers(0, 10, 10)].mean()
-                   for _ in range(B)])
-    pool = np.concatenate([n, e])
-    perm = np.empty(B)
-    for b in range(B):
-        q = RNG.permutation(pool)
-        perm[b] = q[:10].mean() - q[10:].mean()
-    y = np.r_[np.ones(10), np.zeros(10)]
-    correct = 0
-    for i in range(20):
-        m = np.ones(20, bool)
-        m[i] = False
-        thr = (pool[m][y[m] == 1].mean() + pool[m][y[m] == 0].mean()) / 2
-        correct += int((pool[i] > thr) == (y[i] == 1))
-    out['expertise'] = dict(obs=d, ci=np.percentile(bd, [2.5, 97.5]),
-                            ratio=2 ** d, ratio_ci=2 ** np.percentile(bd, [2.5, 97.5]),
-                            p_perm=(1 + (np.abs(perm) >= abs(d)).sum()) / (B + 1),
-                            loo=correct / 20, boot=bd, perm=perm)
+    t = table_expertise()
+    out['expertise'] = dict(obs=t['difference'], ci=t['diff_ci'], ratio=t['ratio'],
+                            ratio_ci=t['ratio_ci'], F=t['F'], df=t['df'], p=t['p'])
     return out
 
 
@@ -126,7 +108,7 @@ def density_check(draws=10000):
 
 def main():
     print('=' * 96)
-    print('SUPPLEMENTARY TABLE 7 A and B   resampling the units each value rests on')
+    print('SUPPLEMENTARY TABLE 7 A and B   resampling the units, and the exact expertise interval')
     print('=' * 96)
     v = section_a_and_b()
     b = v['basketball']
@@ -143,11 +125,12 @@ def main():
     print(f'   ratio        {m["ratio"]:.2f}  95% CI '
           f'[{m["ratio_ci"][0]:.2f}, {m["ratio_ci"][1]:.2f}]')
     e = v['expertise']
-    print(f'   expertise    {e["obs"]:.3f} bits  95% CI '
-          f'[{e["ci"][0]:.3f}, {e["ci"][1]:.3f}]')
-    print(f'   ratio        {e["ratio"]:.3f}  95% CI '
+    print(f'   expertise    {e["obs"]:.3f} bits  exact 95% CI '
+          f'[{e["ci"][0]:.3f}, {e["ci"][1]:.3f}]   two groups of ten')
+    print(f'   ratio        {e["ratio"]:.3f}  exact 95% CI '
           f'[{e["ratio_ci"][0]:.3f}, {e["ratio_ci"][1]:.3f}]')
-    print(f'   permutation  p = {e["p_perm"]:.1e}, leave-one-out {e["loo"]*100:.0f} per cent')
+    print(f'   F({e["df"][0]}, {e["df"][1]}) = {e["F"]:.2f}, p = {e["p"]:.3f}, two-sided, '
+          f'against the null of equal spread')
 
     print()
     print('=' * 96)
