@@ -1,26 +1,28 @@
-"# DERIVED. Per-participant outcome dispersions transcribed as published, and"
-# the Gaussian differential entropy h = 0.5 log2(2 pi e sigma^2) computed
-"# from each. Only differences in h are interpreted, because the additive"
-# constant and the unit cancel. Source publication: Park C. (2026)
-# Information Processing & Management 64(1) 104951 doi:10.1016/j.ipm.2026.104951
-group,participant,outcome_sd_cm,outcome_entropy_h_bits
-Expert,1,0.93,1.942398
-Expert,2,0.83,1.778279
-Expert,3,1.05,2.117485
-Expert,4,1.07,2.144706
-Expert,5,0.92,1.926801
-Expert,6,1.02,2.075665
-Expert,7,0.89,1.878973
-Expert,8,1.16,2.261220
-Expert,9,1.09,2.171424
-Expert,10,0.91,1.911034
-Novice,1,2.22,3.197655
-Novice,2,2.66,3.458522
-Novice,3,2.51,3.374783
-Novice,4,2.07,3.096726
-Novice,5,2.31,3.254988
-Novice,6,2.27,3.229788
-Novice,7,2.76,3.511764
-Novice,8,2.49,3.363241
-Novice,9,2.53,3.386233
-Novice,10,2.36,3.285882
+# DERIVED. Radial error of each participant in centimetres as the mean of five trials
+# transcribed as published in Appendix B of the supplementary material of the source.
+# outcome_information_bits is -log2 f(x) with f the Gaussian fitted to the ten values of
+# the group by maximum likelihood. Its group mean is the outcome entropy h = 0.5 log2(2 pi e
+# sigma^2) at the maximum-likelihood sigma. Only differences in h are interpreted because the
+# additive constant and the unit cancel. Source publication: Park C. (2027) Information
+# Processing & Management 64(1) 104951 doi:10.1016/j.ipm.2026.104951
+group,participant,radial_error_cm,outcome_information_bits
+Expert,1,0.9,2.591484
+Expert,2,1.1,2.146123
+Expert,3,1.8,1.208105
+Expert,4,2.2,1.105632
+Expert,5,2.8,1.543111
+Expert,6,3.3,2.449599
+Expert,7,1.5,1.491875
+Expert,8,3.6,3.229967
+Expert,9,2.4,1.172634
+Expert,10,1.7,1.282989
+Novice,1,0.6,4.526421
+Novice,2,2.2,3.042813
+Novice,3,3.3,2.516372
+Novice,4,4.8,2.446579
+Novice,5,5.2,2.554260
+Novice,6,6.5,3.271470
+Novice,7,1.9,3.256182
+Novice,8,4.7,2.427967
+Novice,9,7.8,4.550350
+Novice,10,4.9,2.468514
