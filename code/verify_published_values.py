@@ -96,21 +96,20 @@ def main():
     print('EXPERTISE')
     print('=' * 92)
     nov, exp = expertise()
-    n = nov.outcome_entropy_h_bits.values
-    e = exp.outcome_entropy_h_bits.values
-    chk('novice outcome entropy', n.mean(), 3.316, unit='bits')
-    chk('expert outcome entropy', e.mean(), 2.021, unit='bits')
-    chk('difference of per-participant means', n.mean() - e.mean(), 1.295, unit='bits')
-    chk('difference from the group mean SDs',
-        delta_outcome_entropy(nov.outcome_sd_cm.mean(), exp.outcome_sd_cm.mean()),
-        1.293, unit='bits')
-    chk('predictability ratio', predictability_ratio(n.mean() - e.mean()), 2.454, tol=1e-3)
-    chk('non-overlap', n.min() - e.max(), 0.836, unit='bits')
+    xn, xe = nov.radial_error_cm.values, exp.radial_error_cm.values
+    chk('novice outcome entropy', nov.outcome_information_bits.mean(), 3.106, unit='bits')
+    chk('expert outcome entropy', exp.outcome_information_bits.mean(), 1.822, unit='bits')
+    d = delta_outcome_entropy(xn.std(ddof=1), xe.std(ddof=1))
+    chk('difference in outcome entropy, Eq 12', d, 1.284, unit='bits')
+    chk('predictability ratio', predictability_ratio(d), 2.435, tol=1e-3)
     from scipy import stats
-    t, _ = stats.ttest_ind(n, e)
-    chk('t statistic', t, 20.55, tol=6e-3)
-    sp = np.sqrt((n.var(ddof=1) + e.var(ddof=1)) / 2)
-    chk('Cohen d', (n.mean() - e.mean()) / sp, 9.19, tol=6e-3)
+    F = xn.var(ddof=1) / xe.var(ddof=1)
+    chk('F statistic on the two variances', F, 5.93, tol=6e-3)
+    chk('two-sided p', 2 * min(stats.f.sf(F, 9, 9), stats.f.cdf(F, 9, 9)), 0.014, tol=6e-4)
+    chk('exact 95% interval, lower', 0.5 * np.log2(F / stats.f.ppf(0.975, 9, 9)), 0.279,
+        unit='bits')
+    chk('exact 95% interval, upper', 0.5 * np.log2(F / stats.f.ppf(0.025, 9, 9)), 2.289,
+        unit='bits')
 
     print()
     print('=' * 92)
