@@ -14,7 +14,7 @@ Every input file used in *Average information across a network quantifies what a
 | Basketball, position centrality, 2010 play-offs, published team by team | Fewell, Armbruster, Ingraham, Petersen & Waters (2012), *PLoS ONE* **7**, e47445 | Transcribed from a printed table. No file was released. | Published values, used with citation |
 | Cortical activity, Human Connectome Project motor task, 100 parcels | Weaver, Faskowitz, Betzel & Lynn (2026), *PNAS* **123**, e2531115123 | `cov_MOTOR` from the `task_covs` release at [BrainCompressibility2025](https://github.com/NicholasJWeaver/BrainCompressibility2025) | none declared at source |
 | Musculoskeletal network, 173 bones and 270 muscles | Murphy, Muldoon, Baker, Lastowka, Bennett, Yang & Bassett (2018), *PLoS Biol.* **16**, e2002811 | `fig2e.csv` from [Zenodo 1069104](https://doi.org/10.5281/zenodo.1069104) | CC BY-SA 4.0 |
-| Expert and novice outcome dispersion, perceptual accuracy task | Park (2026a), *Inf. Process. Manag.* **64**, 104951 | Per-participant standard deviations read from Table D.1 of the published article. | Published values, used with citation |
+| Expert and novice radial error, perceptual identification task | Park (2027), *Inf. Process. Manag.* **64**, 104951 | Per-participant radial error, each the mean of five trials, read from Appendix B of the supplementary material of the published article. | Published values, used with citation |
 | Handball, position centrality, positional attack passing analysis | Korte & Lames (2019), *J. Hum. Kinet.* **70**, 209–221 | Transcribed from Table 1 of the article and checked against the original on 28 July 2026. No file was released. | Published values, used with citation |
 
 ---
